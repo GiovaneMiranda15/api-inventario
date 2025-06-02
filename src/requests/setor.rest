@@ -1,0 +1,26 @@
+@id = 1
+
+### Criar setor
+POST http://localhost:3000/setor
+Content-Type: application/json
+
+{
+    "descricao": "setor de Teste"
+}
+
+### Atualizar setor
+PUT http://localhost:3000/setor/{{id}}
+Content-Type: application/json
+
+{
+    "descricao": "setorTeste Atualizada"
+}
+
+### Ativar/Desativar setor
+PATCH http://localhost:3000/setor/{{id}}/activate
+
+### Listar todos os setors
+GET http://localhost:3000/setor
+
+### Buscar setor por ID
+GET http://localhost:3000/setor/{{id}}

@@ -1,0 +1,26 @@
+@id = 1
+
+### Criar inventario
+POST http://localhost:3000/inventario
+Content-Type: application/json
+
+{
+    "descricao": "inventario de Teste"
+}
+
+### Atualizar inventario
+PUT http://localhost:3000/inventario/{{id}}
+Content-Type: application/json
+
+{
+    "descricao": "inventarioTeste Atualizada"
+}
+
+### Ativar/Desativar inventario
+PATCH http://localhost:3000/inventario/{{id}}/activate
+
+### Listar todos os inventarios
+GET http://localhost:3000/inventario
+
+### Buscar inventario por ID
+GET http://localhost:3000/inventario/{{id}}

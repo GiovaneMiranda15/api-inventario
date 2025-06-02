@@ -1,0 +1,26 @@
+@id = 1
+
+### Criar unidade
+POST http://localhost:3000/unidade
+Content-Type: application/json
+
+{
+    "descricao": "Unidade de Teste"
+}
+
+### Atualizar unidade
+PUT http://localhost:3000/unidade/{{id}}
+Content-Type: application/json
+
+{
+    "descricao": "UnidadeTeste Atualizada"
+}
+
+### Ativar/Desativar unidade
+PATCH http://localhost:3000/unidade/{{id}}/activate
+
+### Listar todos os unidades
+GET http://localhost:3000/unidade
+
+### Buscar unidade por ID
+GET http://localhost:3000/unidade/{{id}}

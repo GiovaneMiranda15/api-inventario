@@ -1,0 +1,31 @@
+@id = 1
+
+### Criar usuário
+POST http://localhost:3000/usuario
+Content-Type: application/json
+
+{
+  "nome": "João da Silva",
+  "email": "s@email.com",
+  "setor": "Desenvolvimento",
+  "unidade": "Tecnologia",
+  "permissao": "ADMIN"
+}
+
+### Atualizar usuário
+PUT http://localhost:3000/usuario/{{id}}
+Content-Type: application/json
+
+{
+  "nome": "João Atualizado",
+  "email": "joaoatualizado@email.com"
+}
+
+### Ativar/Desativar usuário
+PATCH http://localhost:3000/usuario/{{id}}/activate
+
+### Listar todos os usuários
+GET http://localhost:3000/usuario
+
+### Buscar usuário por ID
+GET http://localhost:3000/usuario/{{id}}
