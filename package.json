@@ -2,21 +2,42 @@
   "name": "api-inventario",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "nodemon ./server.js",
+    "dev": "nodemon --legacy-watch --watch ./ --ext ts,json --exec ts-node src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "migrate": "prisma migrate dev --name init",
+    "generate": "prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GiovaneMiranda15/api-inventario.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GiovaneMiranda15/api-inventario/issues"
+  },
+  "homepage": "https://github.com/GiovaneMiranda15/api-inventario#readme",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "joi": "^17.13.3",
-    "pg": "^8.16.0"
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.0",
+    "prisma": "^6.9.0",
+    "zod": "^3.25.55"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.30",
+    "cors": "^2.8.5",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

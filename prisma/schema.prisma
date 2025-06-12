@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model unidade {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  setores setor[]
+
+  estoque estoque[]
+}
+
+model setor {
+  id        String   @id @default(uuid())
+  nome      String
+  unidade   unidade  @relation(fields: [unidadeId], references: [id])
+  unidadeId String
+  usuarios usuario[]
+
+  estoque estoque[]
+}
+
+model usuario {
+  id        String   @id @default(uuid())
+  nome      String
+  senha     String
+  cpf       String   @unique
+  setorId   String
+  setor     setor    @relation(fields: [setorId], references: [id])
+  permissao Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  movimentacao movimentacao[]
+}
+
+model fornecedor {
+  id        String    @id @default(uuid())
+  nome      String
+  cnpj      String    @unique
+  inventario inventario[]
+}
+
+model categoria{
+  id        String    @id @default(uuid())
+  nome      String
+  produtos  produto[]
+}
+
+model produto {
+  id             String       @id @default(uuid())
+  nome           String
+  categoria      categoria    @relation(fields: [categoriaId], references: [id])
+  categoriaId    String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  status         Status       @default(ATIVO)
+  createdBy      String?
+  updatedBy      String?
+  estoque        estoque[]
+  inventario     inventario[]
+}
+
+model estoque {
+  id          String    @id @default(uuid())
+  produto     produto   @relation(fields: [produtoId], references: [id])
+  produtoId   String
+  quantidade  Int
+  setor       setor     @relation(fields: [setorId], references: [id])
+  setorId     String
+  unidade     unidade   @relation(fields: [unidadeId], references: [id])
+  unidadeId   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  status      Status    @default(ATIVO)
+  createdBy   String?
+  updatedBy   String?
+
+  inventario  inventario[]
+  movimentacao movimentacao[]
+
+  @@unique([produtoId, setorId, unidadeId])
+}
+
+model inventario {
+  id           String      @id @default(uuid())
+  estoqueId    String
+  estoque      estoque     @relation(fields: [estoqueId], references: [id])
+  produtoId    String?
+  produto      produto?    @relation(fields: [produtoId], references: [id])
+  responsavel  String
+  fornecedorId String?
+  fornecedor   fornecedor? @relation(fields: [fornecedorId], references: [id])
+  situacao     Situacao
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  createdBy    String?
+  updatedBy    String?
+}
+
+model movimentacao {
+  id          String   @id @default(uuid())
+  estoqueId   String
+  estoque     estoque  @relation(fields: [estoqueId], references: [id])
+  usuarioId   String
+  usuario     usuario  @relation(fields: [usuarioId], references: [id])
+  tipo        TipoMovimentacao
+  quantidade  Int
+  data        DateTime @default(now())
+  observacao  String?
+}
+
+enum Role {
+  ADMIN
+  USER
+  AUDITOR
+}
+
+enum Situacao {
+  EM_USO
+  QUEBRADO
+  MANUTENCAO
+  DESCARTE
+  VENDA
+  RESERVADO
+}
+
+enum Status {
+  ATIVO
+  INATIVO
+}
+
+enum TipoMovimentacao {
+  ENTRADA
+  SAIDA
+  AJUSTE
+  TRANSFERENCIA
+}

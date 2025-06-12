@@ -1,0 +1,26 @@
+@id = 773ad368-ee33-497f-9baf-5e726d9835f3
+
+###
+POST http://localhost:5000/api/unidade
+Content-Type: application/json
+
+{
+  "nome": "DOURADOS"
+}
+
+###
+PUT http://localhost:5000/api/unidade/{{id}}
+Content-Type: application/json
+
+{
+  "nome": "DOURADOS CEMITERIO"
+}
+
+###
+GET http://localhost:5000/api/unidade
+
+###
+GET http://localhost:5000/api/unidade/{{id}}
+
+###
+DELETE http://localhost:5000/api/unidade/{{id}}

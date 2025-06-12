@@ -1,0 +1,31 @@
+@id = 2159d1e1-66f0-48d4-a3d5-a5f6a7972b10
+
+POST  http://localhost:5000/usuario
+Content-Type: application/json
+
+{
+    "name": "Giovane", 
+    "email": "giovane@gmail.com", 
+    "password": "1234", 
+    "setorId": "36c171d3-25a4-49e9-b5b3-7ae10b0befb8"
+}
+
+###
+PUT http://localhost:5000/usuario/{{id}}
+Content-Type: application/json
+
+{
+    "name": "Giovane", 
+    "email": "teste@gmail.com",
+    "password": "1234",
+    "setorId": "36c171d3-25a4-49e9-b5b3-7ae10b0befb8"
+}
+
+###
+GET http://localhost:5000/usuario/
+
+###
+GET http://localhost:5000/usuario/{{id}}
+
+###
+DELETE http://localhost:5000/usuario/{{id}}

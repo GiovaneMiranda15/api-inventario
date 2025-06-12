@@ -1,0 +1,29 @@
+@unidadeId = d789f875-1d66-4e83-a4f9-11758644a460
+@id=0dd2d123-c338-4d81-98e9-7b7ac6644dc3
+
+###
+POST http://localhost:5000/api/setor
+Content-Type: application/json
+
+{
+  "nome": "TECNOLOGIA",
+  "unidadeId": "{{unidadeId}}"
+}
+
+###
+PUT http://localhost:5000/api/setor/{{id}}
+Content-Type: application/json
+
+{
+  "nome": "TECNOLOGIA/DESENVOLVIMENTO",
+  "unidadeId": "{{unidadeId}}"
+}
+
+###
+GET http://localhost:5000/api/setor
+
+###
+GET http://localhost:5000/api/setor/{{id}}
+
+###
+DELETE http://localhost:5000/api/setor/{{id}}

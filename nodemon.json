@@ -1,8 +1,0 @@
-{
-    "watch": [
-        "src",
-        "config",
-        "scripts"
-    ],
-    "ext": "js,json"
-}
